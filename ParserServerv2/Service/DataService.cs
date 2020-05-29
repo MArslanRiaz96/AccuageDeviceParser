@@ -11,7 +11,8 @@ namespace AccuageDeviceParser.Service
 {
    public class DataService
     {
-        public static string ConnectionString { get; set; } = "Server=173.248.132.203,1533; Initial Catalog=accuguage_db; User Id = sa; Password=7gUSS@nKH;";
+        public static string ConnectionString { get; set; } = "Server=173.248.132.203,1533; Initial Catalog=accuguage_TCP_db; User Id = sa; Password=7gUSS@nKH;";
+        public static string ConnectionStringTCP { get; set; } = "Server=173.248.132.203,1533; Initial Catalog=accuguage_db; User Id = sa; Password=7gUSS@nKH;";
         public static void InsertData(DataPacket dataPacket,int deviceId)
         {
             if(dataPacket!=null)
@@ -52,7 +53,7 @@ namespace AccuageDeviceParser.Service
         }
         public  List<Device> LoadDevice()
         {
-            SqlCommand cmd = new SqlCommand("Select * from Devices", new SqlConnection(ConnectionString));
+            SqlCommand cmd = new SqlCommand("Select * from Devices", new SqlConnection(ConnectionStringTCP));
             return fetchDevice(cmd);
         }
         public  List<DeviceRawData> LoadRawData()
