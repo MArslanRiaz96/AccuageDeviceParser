@@ -74,6 +74,8 @@ namespace ParserServerv2
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.BackColor = Color.FromArgb(0, 128, 0);
+            button2.BackColor = Color.FromArgb(255, 255, 255);
             Stop = false;
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += Bw_DoWork;
@@ -84,6 +86,8 @@ namespace ParserServerv2
 
         private void button2_Click(object sender, EventArgs e)
         {
+            button1.BackColor = Color.FromArgb(255, 255, 255);
+            button2.BackColor = Color.FromArgb(255, 0, 0);
             Stop = true;
         }
     }
