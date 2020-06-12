@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="Helper\LocationHelper.cs" />
     <Compile Include="Helper\ParserHeleper.cs" />
+    <Compile Include="Logger\LogBase.cs" />
     <Compile Include="Model\DataPacket.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="Model\DeviceRawData.cs" />

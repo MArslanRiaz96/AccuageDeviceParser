@@ -10,13 +10,21 @@ namespace ParserServerv2.Helper
     {
         public static string  LatParser(string lat)
         {
-
-            return $"{(Convert.ToDouble(lat.Substring(2)) /60)+Convert.ToInt32(lat.Substring(0,2))}";
+            if (lat != "NA" && lat != null)
+            {
+                return $"{(Convert.ToDouble(lat.Substring(2)) / 60) + Convert.ToInt32(lat.Substring(0, 2))}";
+            }
+            return "NA";
 
         }
         public static string  LanHelper(string lan)
         {
+            if (lan != "NA" && lan !=null )
+            {
             return $"{(Convert.ToDouble(lan.Substring(3)) / 60) + Convert.ToInt32(lan.Substring(0,3))}";
+
+            }
+            return "NA";
         }
 
 

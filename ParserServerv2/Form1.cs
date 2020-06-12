@@ -1,6 +1,7 @@
 ﻿using AccuageDeviceParser.Helper;
 using AccuageDeviceParser.Service;
 using ParserServerv2.Helper;
+using ParserServerv2.Logger;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,21 +42,32 @@ namespace ParserServerv2
                     {
                         isItInprogress = true;
                         var rawData = new DataService().LoadRawData();
-                        foreach (var item in rawData)
+                        if (rawData != null)
                         {
-                            if (device != null)
+                            foreach (var item in rawData)
                             {
-                                try
+                                FileLogger fileLogger = new FileLogger();
+                                if (device != null)
                                 {
-                                    new ParserHeleper().DataPacketParser(item.RawData, device.FirstOrDefault(x => x.DeviceId.Equals(item.DeviceLogin)).Id);
-                                    DataService.UpdateRawData(item.Id, true);
-                                }
-                                catch (Exception)
-                                {
-                                    isItInprogress = false;
+                                    try
+                                    {
+                                        new ParserHeleper().DataPacketParser(item.RawData, device.FirstOrDefault(x => x.DeviceId.Equals(item.DeviceLogin)).Id);
+                                        DataService.UpdateRawData(item.Id, true);
+                                        fileLogger.Log("DeviceId : " + device.FirstOrDefault(x => x.DeviceId.Equals(item.DeviceLogin)).Id + "\r\n" + "DeviceLogin : " + item.DeviceLogin
+                                            + "\r\n" + "Raw Data :" + item.RawData + "\r\n" + "Status : Successful" + "\r\n");
+                                        fileLogger = null;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        fileLogger.Log("DeviceId : " + device.FirstOrDefault(x => x.DeviceId.Equals(item.DeviceLogin)).Id + "\r\n" + "DeviceLogin : " + item.DeviceLogin
+                                            + "\r\n" + "Raw Data :" + item.RawData + "\r\n" + "Status : UnSuccessful " + "\r\n" + "Error : "+ ex.ToString() + "\r\n") ;
+                                        fileLogger = null;
+                                        isItInprogress = false;
+                                    }
                                 }
                             }
                         }
+                        
                         isItInprogress = false;
                     }
                     if (Stop)
