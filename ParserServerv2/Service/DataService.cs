@@ -39,7 +39,7 @@ namespace AccuageDeviceParser.Service
                     cmd.Parameters.Add("@Lat1", SqlDbType.VarChar, 50).Value = dataPacket.Lat1;
                     cmd.Parameters.Add("@Output", SqlDbType.VarChar, 50).Value = dataPacket.Output;
                     cmd.Parameters.Add("@PacketType", SqlDbType.Int, 50).Value = dataPacket.PacketType;
-                    cmd.Parameters.Add("@Params", SqlDbType.VarChar, 50).Value = dataPacket.Params;
+                    cmd.Parameters.Add("@Params", SqlDbType.VarChar, 500).Value = dataPacket.Params;
                     cmd.Parameters.Add("@Speed", SqlDbType.VarChar, 50).Value = dataPacket.Speed;
                     cmd.Parameters.Add("@Stats", SqlDbType.VarChar, 50).Value = dataPacket.Stats;
                     cmd.Parameters.Add("@DeviceId", SqlDbType.Int, 50).Value = deviceId;

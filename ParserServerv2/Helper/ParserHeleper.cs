@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using ParserServerv2.Helper;
+using ParserServerv2.Logger;
 
 namespace AccuageDeviceParser.Helper
 {
@@ -81,6 +82,7 @@ namespace AccuageDeviceParser.Helper
         }
         private static DataPacket DataParse(string data)
         {
+            FileLogger fileLogger = new FileLogger();
             var response = data.Split(';');
             if (response.Length > 5)
             {
@@ -106,6 +108,27 @@ namespace AccuageDeviceParser.Helper
                 dataPacket.Adc = response[13];
                 dataPacket.IButton = response[14];
                 dataPacket.Params = response[15];
+                fileLogger.Log("Parse Data for the below Device ID : " + "\r\n"
+                    + "CreatedAt = " + dataPacket.CreatedAt + "\r\n"
+                    + "PacketType = " + dataPacket.PacketType + "\r\n"
+                    + "ThreadId = " + dataPacket.ThreadId + "\r\n"
+                    + "Date = " + dataPacket.Date + "\r\n"
+                    + "Lat = " + dataPacket.Lat + "\r\n"
+                    + "Lat1 = " + dataPacket.Lat1 + "\r\n"
+                    + "Lan = " + dataPacket.Lan + "\r\n"
+                    + "Lan1 = " + dataPacket.Lan1 + "\r\n"
+                    + "Speed = " + dataPacket.Speed + "\r\n"
+                    + "Course = " + dataPacket.Course + "\r\n"
+                    + "Height = " + dataPacket.Height + "\r\n"
+                    + "Stats = " + dataPacket.Stats + "\r\n"
+                    + "Hdop = " + dataPacket.Hdop + "\r\n"
+                    + "Input = " + dataPacket.Input + "\r\n"
+                    + "Output = " + dataPacket.Output + "\r\n"
+                    + "Adc = " + dataPacket.Adc + "\r\n"
+                    + "IButton = " + dataPacket.IButton + "\r\n"
+                    + "Params = " + dataPacket.Params + "\r\n"
+                    + "\r\n");
+                fileLogger = null;
                 return dataPacket;
             }
             return null;
